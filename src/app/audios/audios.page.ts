@@ -14,15 +14,24 @@ export class AudiosPage implements OnInit {
 
   ngOnInit() {
     this.nativeAudio.preloadSimple('atumalaca', 'assets/audios/atumalaca.mp3');
+    this.nativeAudio.preloadSimple('cavalo', 'assets/audios/cavalo.mp3');
   }
 
   play(audio: string) {
-    if (audio === 'atumalaca') {
-      this.nativeAudio.play('atumalaca');
+    switch (audio) {
+      case 'atumalaca':
+        this.nativeAudio.play('atumalaca');
+        break;
+      case 'cavalo':
+        this.nativeAudio.play('cavalo');
+        break;
+      default:
+        this.nativeAudio.play('atumalaca');
+    }
 
-      // this.nativeAudio.preloadComplex('uniqueId2', 'path/to/file2.mp3', 1, 1, 0).then(this.onSuccess, this.onError);
+    // this.nativeAudio.preloadComplex('uniqueId2', 'path/to/file2.mp3', 1, 1, 0).then(this.onSuccess, this.onError);
 
-      // this.nativeAudio.play('uniqueId1').then(this.onSuccess, this.onError);
+    // this.nativeAudio.play('uniqueId1').then(this.onSuccess, this.onError);
 
 // can optionally pass a callback to be called when the file is done playing
 //       this.nativeAudio.play('uniqueId1', () => console.log('uniqueId1 is done playing'));
@@ -34,7 +43,6 @@ export class AudiosPage implements OnInit {
 //       this.nativeAudio.stop('uniqueId1').then(this.onSuccess, this.onError);
 //
 //       this.nativeAudio.unload('uniqueId1').then(this.onSuccess, this.onError);
-    }
   }
 
   onSuccess() {
