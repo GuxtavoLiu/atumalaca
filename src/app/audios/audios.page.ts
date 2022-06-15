@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NativeAudio} from '@awesome-cordova-plugins/native-audio/ngx';
+import {ToastController} from '@ionic/angular';
 
 @Component({
   selector: 'app-audios',
@@ -9,12 +10,27 @@ import {NativeAudio} from '@awesome-cordova-plugins/native-audio/ngx';
 export class AudiosPage implements OnInit {
 
 
-  constructor(private nativeAudio: NativeAudio) {
+  constructor(private nativeAudio: NativeAudio,
+              public toastController: ToastController) {
   }
 
   ngOnInit() {
-    this.nativeAudio.preloadSimple('atumalaca', 'assets/audios/atumalaca.mp3');
-    this.nativeAudio.preloadSimple('cavalo', 'assets/audios/cavalo.mp3');
+    this.nativeAudio.preloadSimple('atumalaca', 'assets/audios/atumalaca.mp3').then(r => {
+      this.presentToast('atumalaca carregado');
+
+      this.nativeAudio.preloadSimple('cavalo', 'assets/audios/cavalo.mp3').then(i => {
+        this.presentToast('cavalo carregado');
+
+        this.nativeAudio.preloadSimple('tome', 'assets/audios/tome.mp3').then(j => {
+          this.presentToast('tome carregado');
+
+          this.nativeAudio.preloadSimple('demais', 'assets/audios/demais.mp3').then(k => {
+            this.presentToast('demais carregado');
+          });
+        });
+      });
+    });
+
   }
 
   play(audio: string) {
@@ -24,6 +40,12 @@ export class AudiosPage implements OnInit {
         break;
       case 'cavalo':
         this.nativeAudio.play('cavalo');
+        break;
+      case 'demais':
+        this.nativeAudio.play('demais');
+        break;
+      case 'tome':
+        this.nativeAudio.play('tome');
         break;
       default:
         this.nativeAudio.play('atumalaca');
@@ -52,6 +74,14 @@ export class AudiosPage implements OnInit {
   onError() {
     console.log('deu ruim');
 
+  }
+
+  async presentToast(messageStr: string) {
+    const toast = await this.toastController.create({
+      message: messageStr,
+      duration: 2000
+    });
+    toast.present();
   }
 
 
