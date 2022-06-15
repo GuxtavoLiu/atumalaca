@@ -15,6 +15,7 @@ export class AudiosPage implements OnInit {
   }
 
   ngOnInit() {
+    //TODO testar o carregamento sem ser em cascata
     this.nativeAudio.preloadSimple('atumalaca', 'assets/audios/atumalaca.mp3').then(r => {
       this.presentToast('atumalaca carregado');
 
