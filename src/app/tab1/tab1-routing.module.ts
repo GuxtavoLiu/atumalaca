@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { Tab1Page } from './tab1.page';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {Tab1Page} from './tab1.page';
+import {NativeAudio} from '@awesome-cordova-plugins/native-audio/ngx';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    NativeAudio
+  ]
 })
-export class Tab1PageRoutingModule {}
+export class Tab1PageRoutingModule {
+}
